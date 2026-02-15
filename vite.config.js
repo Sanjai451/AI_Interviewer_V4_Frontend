@@ -6,7 +6,8 @@ export default defineConfig({
   server: {
     port: 3000,
     proxy: {
-      '/api': { target: 'http://localhost:5000', changeOrigin: true }
-    }
+      // '/api': { target: 'http://localhost:5000', changeOrigin: true }
+      '/api': { target: 'https://ai-interviewer-v4-backend-1.onrender.com', changeOrigin: true }
+    }, 
   }
 })
