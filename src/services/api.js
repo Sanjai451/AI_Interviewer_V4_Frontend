@@ -1,4 +1,5 @@
-const BASE = "/api";
+// const BASE = "/api";
+const BASE = import.meta.env.VITE_API_URL || "/api";
 
 async function req(endpoint, options = {}) {
   const token = localStorage.getItem("token");
@@ -7,9 +8,17 @@ async function req(endpoint, options = {}) {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
+    credentials: "include",
     ...options,
     ...(options.body ? { body: JSON.stringify(options.body) } : {}),
   });
+  // Better error handling for non-JSON responses
+  const contentType = res.headers.get("content-type");
+  if (!contentType || !contentType.includes("application/json")) {
+    const text = await res.text();
+    console.error("[API] Non-JSON response:", text.substring(0, 200));
+    throw new Error(`Server returned non-JSON response (${res.status}). Check backend URL and CORS.`);
+  }
   const data = await res.json();
   if (!res.ok || !data.success) throw new Error(data.error || `Request failed: ${res.status}`);
   return data;
