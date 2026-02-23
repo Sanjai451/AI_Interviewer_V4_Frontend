@@ -1,5 +1,7 @@
 // const BASE = "/api";
-const BASE = import.meta.env.VITE_API_URL || "/api";
+// const BASE = import.meta.env.VITE_API_URL || "/api";
+
+const BASE = "https://ai-interviewer-v4-backend-1.onrender.com/api";
 
 async function req(endpoint, options = {}) {
   const token = localStorage.getItem("token");
