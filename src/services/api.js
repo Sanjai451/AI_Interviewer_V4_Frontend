@@ -8,7 +8,7 @@ async function req(endpoint, options = {}) {
       "Content-Type": "application/json",
       ...(token ? { Authorization: `Bearer ${token}` } : {}),
     },
-    credentials: "include",
+    // credentials: "include",
     ...options,
     ...(options.body ? { body: JSON.stringify(options.body) } : {}),
   });
