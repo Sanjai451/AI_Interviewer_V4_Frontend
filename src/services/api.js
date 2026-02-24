@@ -2,7 +2,7 @@ import BASE_URL from "../config";
 
 const BASE = BASE_URL;
 
-// console.log("Backend URL : " + BASE_URL)
+console.log("Backend URL : " + BASE)
 
 async function req(endpoint, options = {}) {
   const token = localStorage.getItem("token");
